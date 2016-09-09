@@ -27,3 +27,9 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+# Configure phoenix
+# config :quantum, cron: [
+#   # Every hour
+#   "*/15 * * * *":: {}
+# ]

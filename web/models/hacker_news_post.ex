@@ -1,5 +1,7 @@
 defmodule HackerNews.HackerNewsPost do
   use HackerNews.Web, :model
+  alias HackerNews.HackerNewsPost
+  alias HackerNews.Repo
 
   schema "hacker_news_post" do
     field :author, :string
@@ -21,5 +23,23 @@ defmodule HackerNews.HackerNewsPost do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  def api_request do
+    url = "http://hn.algolia.com/api/v1/search_by_date?query=elixir"
+    case HTTPoison.get(url) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        {:ok, response} = Poison.decode body
+        HackerNewsPost.parse(response)
+    end
+  end
+
+  def parse(%{"hits" => posts}), do: posts |> parse
+
+  def parse(posts) when is_list(posts), do: posts |> Enum.map(&parse/1)
+
+  def parse(data = %{"author" => author, "story_title" => story_title, "story_url" => story_url}) do
+    post = %HackerNewsPost{author: author, story_title: story_title, story_url: story_url}
+    Repo.insert!(post)
   end
 end
