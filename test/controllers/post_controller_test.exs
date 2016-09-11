@@ -1,4 +1,4 @@
-defmodule HackerNews.API.PostControllerTest do
+defmodule HackerNews.PostControllerTest do
   use HackerNews.ConnCase
 
   test "lists all entries on index", %{conn: conn} do

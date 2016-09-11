@@ -1,4 +1,4 @@
-defmodule HackerNews.API.PostController do
+defmodule HackerNews.PostController do
   use HackerNews.Web, :controller
   alias HackerNews.HackerNewsPost
 

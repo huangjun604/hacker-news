@@ -1,8 +1,8 @@
-defmodule HackerNews.API.PostView do
+defmodule HackerNews.PostView do
   use HackerNews.Web, :view
 
   def render("index.json", %{posts: posts}) do
-    %{posts: render_many(posts, HackerNews.API.PostView, "post.json")}
+    %{posts: render_many(posts, HackerNews.PostView, "post.json")}
   end
 
   def render("post.json", %{post: post}) do

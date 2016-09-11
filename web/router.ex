@@ -20,9 +20,9 @@ defmodule HackerNews.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", HackerNews.API do
+  scope "/", HackerNews do
     pipe_through :api
-
+    
     get "/posts", PostController, :index
   end
 end
