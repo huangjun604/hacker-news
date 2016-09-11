@@ -29,7 +29,7 @@ config :phoenix, :generators,
   binary_id: false
 
 # Configure phoenix
-# config :quantum, cron: [
-#   # Every hour
-#   "*/15 * * * *":: {}
-# ]
+config :quantum, cron: [
+  # Every minute
+  "* * * * *": {HackerNews.SnycHackerNewsPosts, :sync}
+]
