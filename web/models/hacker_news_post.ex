@@ -7,11 +7,12 @@ defmodule HackerNews.HackerNewsPost do
     field :author, :string
     field :story_title, :string
     field :story_url, :string
+    field :object_id, :integer
 
     timestamps
   end
 
-  @required_fields ~w(author story_title story_url)
+  @required_fields ~w(author story_title story_url object_id)
   @optional_fields ~w()
 
   @doc """
@@ -26,14 +27,16 @@ defmodule HackerNews.HackerNewsPost do
   end
 
   def insert(post) do
-    Repo.insert!(post)
+    unless Repo.get_by(HackerNewsPost, object_id: post.object_id) do
+      Repo.insert!(post)    
+    end
   end
 
   def parse(%{"hits" => posts}), do: posts |> parse
 
   def parse(posts) when is_list(posts), do: posts |> Enum.map(&parse/1)
 
-  def parse(data = %{"author" => author, "story_title" => story_title, "story_url" => story_url}) do
-    %HackerNewsPost{author: author, story_title: story_title, story_url: story_url}
+  def parse(data = %{"author" => author, "story_title" => story_title, "story_url" => story_url, "objectID" => object_id}) do
+    %HackerNewsPost{author: author, story_title: story_title, story_url: story_url, object_id: String.to_integer(object_id)}
   end
 end
