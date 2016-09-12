@@ -31,5 +31,5 @@ config :phoenix, :generators,
 # Configure phoenix
 config :quantum, cron: [
   # Every minute
-  "* * * * *": {HackerNews.SnycHackerNewsPosts, :sync}
+  "*/60 * * * *": {HackerNews.SnycHackerNewsPosts, :sync}
 ]
