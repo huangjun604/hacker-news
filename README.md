@@ -1,6 +1,10 @@
 # HackerNews
 
-Hacker News is a web application built by phoenix framework. It will grab the hacker news posts from api(http://hn.algolia.com/api/v1/search_by_date?query=elixir), insert the data into Postgres database and have api access by `GET \posts`
+Hacker News is a web application built by phoenix framework. It will:
+
+  * Fetch the hacker news posts from remote api(http://hn.algolia.com/api/v1/search_by_date?query=elixir)
+  * Insert the data into Postgres database
+  * Create api access via `GET \posts`
 
 ## Usage
 
@@ -12,10 +16,14 @@ To start your Phoenix app:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-## Learn more
+## Testing
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: http://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+To run test, invoke:
+
+```
+$ mix test
+```
+
+## Copyright
+
+Copyright © 2016 Stephen Huang
